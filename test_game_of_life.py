@@ -19,6 +19,11 @@ class GameOfLifeTest(unittest.TestCase):
     def test_next_returns_living_cells(self):
         game = GameOfLife()
         self.assertEqual(game.next([]), [])
-        
+
+    def test_middle_cell_in_row_stays_alive(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '0, 1', '0, 2']
+        self.assertEqual(game.next(initial_cells), ['0, 1'])
+
 if __name__ == '__main__':
     unittest.main()
