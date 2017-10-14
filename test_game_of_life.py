@@ -8,5 +8,9 @@ class GameOfLifeTest(unittest.TestCase):
         game = GameOfLife()
         self.assertEqual(game, game)
 
+    def test_next_method_exists(self):
+        game = GameOfLife()
+        game.next()
+
 if __name__ == '__main__':
     unittest.main()
