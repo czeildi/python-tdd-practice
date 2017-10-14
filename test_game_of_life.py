@@ -33,5 +33,14 @@ class GameOfLifeTest(unittest.TestCase):
             ['0, 1', '0, 2', '0, 3']
         )
 
+    def test_cells_with_no_immediate_neighbors_die(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '0, 1', '0, 2', '0, 4']
+        self.assertEqual(
+            game.next(initial_cells),
+            ['0, 1']
+        )
+
+
 if __name__ == '__main__':
     unittest.main()
