@@ -2,4 +2,4 @@ class GameOfLife:
     """implement Conway's game of life"""
 
     def next(self, living_cells = []):
-        return living_cells[1:2]
+        return living_cells[1:len(living_cells) - 1]

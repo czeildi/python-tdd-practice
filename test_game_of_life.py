@@ -25,5 +25,13 @@ class GameOfLifeTest(unittest.TestCase):
         initial_cells = ['0, 0', '0, 1', '0, 2']
         self.assertEqual(game.next(initial_cells), ['0, 1'])
 
+    def test_all_but_periferial_cells_stay_alive_in_row(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '0, 1', '0, 2', '0, 3', '0, 4']
+        self.assertEqual(
+            game.next(initial_cells),
+            ['0, 1', '0, 2', '0, 3']
+        )
+
 if __name__ == '__main__':
     unittest.main()
