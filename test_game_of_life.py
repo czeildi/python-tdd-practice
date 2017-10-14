@@ -16,5 +16,9 @@ class GameOfLifeTest(unittest.TestCase):
         game = GameOfLife()
         game.next([])
 
+    def test_next_returns_living_cells(self):
+        game = GameOfLife()
+        self.assertEqual(game.next([]), [])
+        
 if __name__ == '__main__':
     unittest.main()
