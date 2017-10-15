@@ -55,6 +55,11 @@ class GameOfLifeTest(unittest.TestCase):
         game = GameOfLife()
         initial_cells = ['0, 0', '-1, 1', '1, -1']
         self.assertEqual(game.next(initial_cells), ['0, 0'])
+    
+    def test_cell_with_two_neighbors_below_and_above_stays_alive(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '-1, 0', '1, 0']
+        self.assertEqual(game.next(initial_cells), ['0, 0'])
 
 
 if __name__ == '__main__':

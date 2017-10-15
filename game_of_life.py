@@ -12,7 +12,7 @@ class GameOfLife:
         return len(living_neigbors)
     
     def neighbors(self, cell):
-        neighbor_directions = [[1, 0], [0, -1], [0, 1], [-1, -1], [1, 1], [1, -1], [-1, 1]]
+        neighbor_directions = [[1, 0], [0, -1], [0, 1], [-1, -1], [1, 1], [1, -1], [-1, 1], [-1, 0]]
         return [self.neighborInDirection(cell, x, y) for (x, y) in neighbor_directions]
 
     def neighborInDirection(self, cell, xShift, yShift):
