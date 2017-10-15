@@ -44,6 +44,16 @@ class GameOfLifeTest(unittest.TestCase):
     def test_cell_with_neighbors_in_l_shape_stays_alive(self):
         game = GameOfLife()
         initial_cells = ['0, 0', '1, 0', '0, 1']
+        self.assertTrue('0, 0' in game.next(initial_cells))
+
+    def test_cell_with_two_neighbors_in_corner_stays_alive(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '-1, -1', '1, 1']
+        self.assertEqual(game.next(initial_cells), ['0, 0'])
+    
+    def test_cell_with_two_neighbors_in_other_corner_stays_alive(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '-1, 1', '1, -1']
         self.assertEqual(game.next(initial_cells), ['0, 0'])
 
 
