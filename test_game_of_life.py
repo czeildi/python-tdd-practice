@@ -71,6 +71,16 @@ class GameOfLifeTest(unittest.TestCase):
         initial_cells = ['0, 0', '1, 0', '0, 1', '-1, 0', '0, -1']
         self.assertFalse('0, 0' in game.next(initial_cells))
 
+    def test_origo_borns_if_three_neighbors(self):
+        game = GameOfLife()
+        initial_cells = ['1, 1', '0, -1', '-1, 1']
+        self.assertTrue('0, 0' in game.next(initial_cells))
+
+    def test_return_living_cells_only_once(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '1, 1', '0, -1', '-1, 1']
+        self.assertEqual(game.next(initial_cells), ['0, 0'])
+
 
 if __name__ == '__main__':
     unittest.main()

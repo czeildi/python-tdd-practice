@@ -2,10 +2,22 @@ class GameOfLife:
     """implement Conway's game of life"""
 
     def next(self, living_cells = []):
+        cells_remaining_alive = self.cellsRemainingAlive(living_cells)
+        borning_cells = self.borningCells(living_cells)
+        return list(set(cells_remaining_alive + borning_cells))
+    
+    def cellsRemainingAlive(self, living_cells):
         return [c for c in living_cells if self.cellRemainsAlive(living_cells, c)]
     
     def cellRemainsAlive(self, living_cells, cell):
         return self.numOfLivingNeighbors(living_cells, cell) in (2, 3)
+    
+    def borningCells(self, living_cells):
+        possible_newborns = ['0, 0']
+        return [c for c in possible_newborns if self.cellBorns(living_cells, c)]
+    
+    def cellBorns(self, living_cells, cell):
+        return self.numOfLivingNeighbors(living_cells, cell) == 3
     
     def numOfLivingNeighbors(self, living_cells, cell):
         living_neigbors = [c for c in self.neighbors(cell) if c in living_cells]
