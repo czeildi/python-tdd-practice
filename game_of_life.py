@@ -9,12 +9,12 @@ class GameOfLife:
     def cellsRemainingAlive(self, living_cells):
         return [c for c in living_cells if self.cellRemainsAlive(living_cells, c)]
     
-    def cellRemainsAlive(self, living_cells, cell):
-        return self.numOfLivingNeighbors(living_cells, cell) in (2, 3)
-    
     def borningCells(self, living_cells):
         possible_newborns = self.neighborsOfAnyLiving(living_cells)
         return [c for c in possible_newborns if self.cellBorns(living_cells, c)]
+    
+    def cellRemainsAlive(self, living_cells, cell):
+        return self.numOfLivingNeighbors(living_cells, cell) in (2, 3)
     
     def cellBorns(self, living_cells, cell):
         return self.numOfLivingNeighbors(living_cells, cell) == 3
@@ -28,9 +28,9 @@ class GameOfLife:
         return len(living_neigbors)
     
     def neighbors(self, cell):
-        neighbor_directions = [[1, 0], [0, -1], [0, 1], [-1, 0],
-                               [1, 1], [1, -1], [-1, 1], [-1, -1]]
-        return [self.neighborInDirection(cell, x, y) for (x, y) in neighbor_directions]
+        directions = [[1, 0], [0, -1], [0, 1], [-1, 0],
+                      [1, 1], [1, -1], [-1, 1], [-1, -1]]
+        return [self.neighborInDirection(cell, x, y) for (x, y) in directions]
 
     def neighborInDirection(self, cell, xShift, yShift):
         (x, y) = self.coordsOfCell(cell)
