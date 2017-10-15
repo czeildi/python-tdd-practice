@@ -5,7 +5,7 @@ class GameOfLife:
         return [c for c in living_cells if self.cellRemainsAlive(living_cells, c)]
     
     def cellRemainsAlive(self, living_cells, cell):
-        return self.numOfLivingNeighbors(living_cells, cell) >= 2
+        return self.numOfLivingNeighbors(living_cells, cell) in (2, 3)
     
     def numOfLivingNeighbors(self, living_cells, cell):
         living_neigbors = [c for c in self.neighbors(cell) if c in living_cells]

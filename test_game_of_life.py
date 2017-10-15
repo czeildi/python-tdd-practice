@@ -66,6 +66,11 @@ class GameOfLifeTest(unittest.TestCase):
         initial_cells = ['0, 0', '-1, 0', '1, 0', '0, 1']
         self.assertTrue('0, 0' in game.next(initial_cells))
 
+    def test_cell_with_more_neighbors_die_of_overpopulation(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '1, 0', '0, 1', '-1, 0', '0, -1']
+        self.assertFalse('0, 0' in game.next(initial_cells))
+
 
 if __name__ == '__main__':
     unittest.main()
