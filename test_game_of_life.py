@@ -89,6 +89,11 @@ class GameOfLifeTest(unittest.TestCase):
         initial_cells = ['10, 10', '11, 10', '10, 11']
         self.assertTrue('11, 11' in game.next(initial_cells))
 
+    def test_beacon(self):
+        game = GameOfLife()
+        initial_cells = ['0, 0', '0, -1', '1, 0', '1, -1', '-1, 1', '-1, 2', '-2, 1', '-2, 2']
+        self.assertEqual(initial_cells.sort(), game.next(game.next(initial_cells)).sort())
+
 
 if __name__ == '__main__':
     unittest.main()
