@@ -2,26 +2,22 @@ class GameOfLife:
     """implement Conway's game of life"""
 
     def next(self, living_cells = []):
-        return [c for c in living_cells if self.twoLivingNeighbors(living_cells, c)]
+        return [c for c in living_cells if self.cellRemainsAlive(living_cells, c)]
     
-    def twoLivingNeighbors(self, living_cells, cell):
-        left_lives = self.leftNeighborLives(living_cells, cell)
-        right_lives = self.rightNeighborLives(living_cells, cell)
-        return left_lives and right_lives
+    def cellRemainsAlive(self, living_cells, cell):
+        return self.numOfLivingNeighbors(living_cells, cell) == 2
     
-    def leftNeighborLives(self, living_cells, cell):
-        return self.leftNeighbor(cell) in living_cells
+    def numOfLivingNeighbors(self, living_cells, cell):
+        living_neigbors = [c for c in self.neighbors(cell) if c in living_cells]
+        return len(living_neigbors)
     
-    def rightNeighborLives(self, living_cells, cell):
-        return self.rightNeighbor(cell) in living_cells
+    def neighbors(self, cell):
+        neighbor_directions = [[1, 0], [0, -1], [0, 1]]
+        return [self.neighborInDirection(cell, x, y) for (x, y) in neighbor_directions]
 
-    def leftNeighbor(self, cell):
+    def neighborInDirection(self, cell, xShift, yShift):
         (x, y) = self.coordsOfCell(cell)
-        return self.cellOfCoords(x, y - 1)
-
-    def rightNeighbor(self, cell):
-        (x, y) = self.coordsOfCell(cell)
-        return self.cellOfCoords(x, y + 1)
+        return self.cellOfCoords(x + xShift, y + yShift)
 
     def coordsOfCell(self, cell):
         return [int(coord) for coord in cell.split(', ')]
