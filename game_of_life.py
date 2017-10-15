@@ -13,11 +13,15 @@ class GameOfLife:
         return self.numOfLivingNeighbors(living_cells, cell) in (2, 3)
     
     def borningCells(self, living_cells):
-        possible_newborns = ['0, 0']
+        possible_newborns = self.neighborsOfAnyLiving(living_cells)
         return [c for c in possible_newborns if self.cellBorns(living_cells, c)]
     
     def cellBorns(self, living_cells, cell):
         return self.numOfLivingNeighbors(living_cells, cell) == 3
+    
+    def neighborsOfAnyLiving(self, living_cells):
+        neighbor_lists = [self.neighbors(c) for c in living_cells]
+        return [c for neighbors in neighbor_lists for c in neighbors]
     
     def numOfLivingNeighbors(self, living_cells, cell):
         living_neigbors = [c for c in self.neighbors(cell) if c in living_cells]
