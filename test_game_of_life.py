@@ -23,19 +23,16 @@ class GameOfLifeTest(unittest.TestCase):
     def test_middle_cell_in_row_stays_alive(self):
         game = GameOfLife()
         initial_cells = ['0, 0', '0, 1', '0, 2']
-        next_cells = game.next(initial_cells)
-        self.assertTrue('0, 1' in next_cells)
+        self.assertTrue('0, 1' in game.next(initial_cells))
 
     def test_all_but_periferial_cells_stay_alive_in_row(self):
         game = GameOfLife()
-        initial_cells = ['0, 0', '0, 1', '0, 2', '0, 3', '0, 4']
-        next_cells = game.next(initial_cells)
+        next_cells = game.next(['0, 0', '0, 1', '0, 2', '0, 3', '0, 4'])
         self.assertTrue('0, 1' in next_cells and '0, 2' in next_cells and '0, 3' in next_cells)
 
     def test_cells_with_no_immediate_neighbors_die(self):
         game = GameOfLife()
-        initial_cells = ['0, 0', '0, 1', '0, 2', '0, 4']
-        next_cells = game.next(initial_cells)
+        next_cells = game.next(['0, 0', '0, 1', '0, 2', '0, 4'])
         self.assertTrue('0, 1' in next_cells and '0, 2' not in next_cells)
 
     def test_cell_with_neighbors_in_l_shape_stays_alive(self):
@@ -75,9 +72,8 @@ class GameOfLifeTest(unittest.TestCase):
 
     def test_return_living_cells_only_once(self):
         game = GameOfLife()
-        initial_cells = ['0, 0', '1, 1', '0, -1', '-1, 1']
-        num_origo_among_next = len([c for c in game.next(initial_cells) if c == '0, 0'])
-        self.assertEqual(num_origo_among_next, 1)
+        next_cells = game.next(['0, 0', '1, 1', '0, -1', '-1, 1'])
+        self.assertEqual(len([c for c in next_cells if c == '0, 0']), 1)
 
     def test_other_cell_borns_with_three_neighbors(self):
         game = GameOfLife()
