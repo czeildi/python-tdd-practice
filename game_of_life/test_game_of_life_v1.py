@@ -1,6 +1,6 @@
 import unittest
 
-from game_of_life import GameOfLife
+from game_of_life_v1 import GameOfLife
 
 class GameOfLifeTest(unittest.TestCase):
     """test Conway's game of life"""
