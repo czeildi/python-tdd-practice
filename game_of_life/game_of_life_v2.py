@@ -5,10 +5,12 @@ def living_neighbors(cell, alive):
     return [c for c in alive if c != cell and are_cells_close(c, cell)]
 
 def are_cells_close(c1, c2):
-    return x_distance(c1, c2) <= 1
+    close_in_0th = distance_in_nth_direction(c1, c2, 0) <= 1
+    close_in_1st = distance_in_nth_direction(c1, c2, 1) <= 1
+    return close_in_0th and close_in_1st
 
-def x_distance(cell_1, cell_2):
-    return abs(x_coord_of_cell(cell_1) - x_coord_of_cell(cell_2))
+def distance_in_nth_direction(c1, c2, n):
+    return abs(nth_coord_of_cell(c1, n) - nth_coord_of_cell(c2, n))
 
-def x_coord_of_cell(cell):
-    return int(cell.split(', ')[0])
+def nth_coord_of_cell(cell, n):
+    return int(cell.split(', ')[n])
