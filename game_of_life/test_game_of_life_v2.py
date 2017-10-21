@@ -29,3 +29,7 @@ def test_gol_origo_borns_if_3_neighbors():
 
 def test_gol_cell_borns_if_3_neighbors():
     assert '5, 5' in game_of_life(['6, 6', '4, 4', '4, 6'])
+
+def test_gol_cell_in_alive_at_most_once():
+    next_gen = game_of_life(['6, 6', '4, 4', '4, 6', '5, 5'])
+    assert len([c for c in next_gen if c == '5, 5']) <= 1

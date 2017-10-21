@@ -1,5 +1,5 @@
 def game_of_life(alive = []):
-    return newborns(alive) + staying_alive(alive)
+    return list(set(newborns(alive) + staying_alive(alive)))
 
 def newborns(alive):
     return next_living_from(
