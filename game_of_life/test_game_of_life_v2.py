@@ -11,3 +11,6 @@ def test_gol_nobody_borns_from_nothing():
 
 def test_gol_cell_stays_alive_w_2_neighbors():
     assert '0, 0' in game_of_life(alive = ['0, 0', '1, 0', '-1, 0'])
+
+def test_gol_cell_stays_alive_w_3_neighbors():
+    assert '0, 0' in game_of_life(alive = ['0, 0', '1, 0', '-1, 0', '0, -1'])
