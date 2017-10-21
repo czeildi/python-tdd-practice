@@ -17,3 +17,6 @@ def test_gol_cell_stays_alive_w_3_neighbors():
 
 def test_gol_cell_dies_if_others_are_far():
     assert '0, 0' not in game_of_life(alive = ['0, 0', '2, 0', '0, 3'])
+
+def test_gol_cell_dies_if_others_are_far_behind():
+    assert '0, 0' not in game_of_life(alive = ['0, 0', '-2, 0', '0, 3'])
