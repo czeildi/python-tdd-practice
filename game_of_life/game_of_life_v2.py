@@ -1,2 +1,2 @@
-def game_of_life():
-    pass
+def game_of_life(alive = []):
+    return []
