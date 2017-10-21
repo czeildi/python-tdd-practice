@@ -1,5 +1,14 @@
 def game_of_life(alive = []):
-    return [c for c in alive if len(living_neighbors(c, alive)) in [2, 3]]
+    newborns = borning_cells(alive)
+    staying_alive = next_living_from(cells = alive, alive = alive, valid_neighbor_counts = [2, 3])
+    return newborns + staying_alive
+
+def borning_cells(alive):
+    neighbors_of_alive = ['0, 0']
+    return next_living_from(neighbors_of_alive, alive, [3])
+
+def next_living_from(cells, alive, valid_neighbor_counts):
+    return [c for c in cells if len(living_neighbors(c, alive)) in valid_neighbor_counts]
 
 def living_neighbors(cell, alive):
     return [c for c in alive if c != cell and are_cells_close(c, cell)]

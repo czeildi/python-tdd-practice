@@ -23,3 +23,6 @@ def test_gol_cell_dies_if_others_are_far_behind():
 
 def test_gol_cell_dies_if_others_are_far_above():
     assert '0, 0' not in game_of_life(alive = ['0, 0', '0, 1', '0, 3'])
+
+def test_gol_origo_borns_if_3_neighbors():
+    assert '0, 0' in game_of_life(alive = ['1, 0', '1, 1', '0, 1'])
