@@ -8,3 +8,6 @@ def test_gol_accepts_alive_param():
 
 def test_gol_nobody_borns_from_nothing():
     assert len(game_of_life(alive = [])) == 0
+
+def test_gol_cell_stays_alive_w_2_neighbors():
+    assert '0, 0' in game_of_life(alive = ['0, 0', '1, 0', '-1, 0'])
