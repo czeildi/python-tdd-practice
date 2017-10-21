@@ -1,25 +1,40 @@
 def game_of_life(alive = []):
-    newborns = borning_cells(alive)
-    staying_alive = next_living_from(cells = alive, alive = alive, valid_neighbor_counts = [2, 3])
-    return newborns + staying_alive
+    return newborns(alive) + staying_alive(alive)
 
-def borning_cells(alive):
-    neighbors_of_alive = ['0, 0']
-    return next_living_from(neighbors_of_alive, alive, [3])
+def newborns(alive):
+    return next_living_from(
+        cells = neighbors_of_all_alive(alive),
+        alive = alive,
+        valid_neighbor_counts = [3]
+    )
+
+def staying_alive(alive):
+    return next_living_from(
+        cells = alive,
+        alive = alive,
+        valid_neighbor_counts = [2, 3]
+    )
 
 def next_living_from(cells, alive, valid_neighbor_counts):
-    return [c for c in cells if len(living_neighbors(c, alive)) in valid_neighbor_counts]
+    return [c for c in cells if cell_will_live(c, alive, valid_neighbor_counts)]
+
+def cell_will_live(cell, alive, valid_neighbor_counts):
+    return len(living_neighbors(cell, alive)) in valid_neighbor_counts
 
 def living_neighbors(cell, alive):
-    return [c for c in alive if c != cell and are_cells_close(c, cell)]
+    return [c for c in alive if c != cell and cell in neighbors(c)]
 
-def are_cells_close(c1, c2):
-    close_in_0th = distance_in_nth_direction(c1, c2, 0) <= 1
-    close_in_1st = distance_in_nth_direction(c1, c2, 1) <= 1
-    return close_in_0th and close_in_1st
+def neighbors_of_all_alive(alive):
+    neighbor_lists_of_alive = [neighbors(c) for c in alive]
+    return [c for n in neighbor_lists_of_alive for c in n]
 
-def distance_in_nth_direction(c1, c2, n):
-    return abs(nth_coord_of_cell(c1, n) - nth_coord_of_cell(c2, n))
+def neighbors(cell):
+    (x, y) = (nth_coord_of_cell(cell, 0), nth_coord_of_cell(cell, 1))
+    return [str(x + dx) + ', ' + str(y + dy) for (dx, dy) in neighbor_steps()]
 
 def nth_coord_of_cell(cell, n):
     return int(cell.split(', ')[n])
+
+def neighbor_steps():
+    return [(0, 1), (0, -1), (1, 0), (-1, 0),
+            (1, 1), (1, -1), (-1, 1), (-1, -1)]
